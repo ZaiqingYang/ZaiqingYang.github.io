@@ -107,6 +107,9 @@ h1,h2,h3{
     padding: 16px;
     color: gray;
 }
+#post_meta a{
+	color: gray;
+}
 #footer{
     margin-bottom: 5px;
     padding: 16px;
