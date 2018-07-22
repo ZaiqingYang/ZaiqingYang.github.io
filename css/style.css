@@ -1,0 +1,129 @@
+/*reset bootstrap style*/
+body{
+    font-size: 16px;
+    line-height: 180%;
+}
+a{
+    color: black;
+}
+a:hover{
+    color: #000;
+    text-decoration: none;
+    background: #e7e7e7;
+}
+.navbar-default{
+    background-color: white;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+}
+.navbar{
+    margin-bottom: 16px;
+}
+h1,h2,h3{
+    font-family: ;
+    font-weight: bold;
+}
+.col-md-4, .col-md-8{
+    padding-left:8px;
+    padding-right: 8px;
+}
+@media (min-width: 768px){
+    .container-fluid {
+        width: 750px;
+    }
+}
+@media (min-width: 992px){
+    .container-fluid {
+        width: 970px;
+    }
+    .post{
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+/*end reset*/
+
+
+/*custom style*/
+.module{
+    border: 1px solid #e7e7e7;
+    margin-bottom: 16px;
+    
+}
+.module_title{
+    padding: 5px 16px;
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e7e7e7;
+    font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+}
+.module_content{
+    padding: 16px 0px;
+    font-family: Georgia, serif;
+}
+.desc{
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.desc_title{
+    text-align: right;
+}
+.post{
+    padding: 16px;
+}
+.post .module_title{
+    border: none;
+    padding: 0px;
+    color: #000;
+    background: white;
+}
+.post .module_content{
+    color: #000;
+    font-size: 16px;
+    line-height: 180%;
+}
+.post .module_content img{
+    display: block;
+    text-align: center;
+    max-width: 100%;
+    max-height: auto;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 16px;
+    box-shadow: 0 0 10px #555;
+    -webkit-box-shadow: 0 0 10px #555;
+}
+#post_meta{
+    border-bottom: 2px solid LightGrey;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-family: Georgia, serif;
+    line-height: 180%;
+    padding: 16px;
+    color: gray;
+}
+#footer{
+    margin-bottom: 5px;
+    padding: 16px;
+    border-top: 1px solid #e7e7e7;
+    text-align: center;
+    font-family: Georgia, serif;
+}
+.year{
+    font-size: 20px;
+    padding: 0 16px;
+    font-weight: bold;
+}
+@media screen and (max-width: 720px) {
+    .post{
+        padding: 3px;
+    }
+    .post .module_title{
+        padding: 0 3px;
+    }
+}
