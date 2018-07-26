@@ -9,6 +9,8 @@
 	<script src="/js/jquery-1.12.4.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<link rel="icon" href="/res/favicon.png" type="image/x-icon">
+	<link rel="stylesheet" href="/css/highlight.min.css">
+	<script src="/js/highlight.min.js"></script>
 </head>
 <body>
 <nav class="navbar-default navbar">
@@ -83,7 +85,8 @@
 <p>Linux系统下使用<code>dd</code>命令；Windows用户使用<a href="https://rufus.akeo.ie/?locale=zh_CN/" target="_blank" rel="noopener">Rufus</a> ，或者 <a href="http://sourceforge.net/p/usbwriter/wiki/Documentation/" target="_blank" rel="noopener">USBwriter</a> 、<a href="https://sourceforge.net/projects/win32diskimager/" target="_blank" rel="noopener">win32diskimager</a> 也可以。</p>
 <p><strong>1.6 书写约定</strong></p>
 <p>在本教程中，Linux命令以井号(#)打头，例如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> ls -al</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># ls -al
+</code></pre>
 <p><strong>1.7 建议</strong></p>
 <p>本教程尽量以人性化的方式完成Arch Linux的安装，但难免有没有详尽的地方，建议结合官方Wiki阅读本篇教程。</p>
 <p><a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="noopener">Installation guide (English Version)</a></p>
@@ -97,21 +100,27 @@
 <p><strong>2.3 键盘布局(可忽略)</strong></p>
 <p>默认是美式键盘映射，一般我们的键盘都是美式键盘。</p>
 <p><strong>2.4 验证启动模式</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> ls /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># ls /sys/firmware/efi/efivars
+</code></pre>
 <p>如果有东西输出则是UEFI，否则BIOS。这一步决定后面的引导安装，虽然在2.2节已经确定启动模式，以防万一还是再验证下。</p>
 <p><strong>2.5 连接到因特网</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> ping -c 3 archlinux.org</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># ping -c 3 archlinux.org
+</code></pre>
 <p>网络必须能与外网连接，因为系统安装其实就是从一个叫做“软件源”的网站下载所需要的软件并安装。<code>ping</code>命令就是检查能不能连接到对应的网址，如果界面有像这样“PING archlinux.org (ip地址)…”的输出一般就是没问题了。</p>
 <p><strong>2.6 更新系统时间</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> timedatectl set-ntp true</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># timedatectl set-ntp true
+</code></pre>
 <p>就是简单的对时。</p>
 <p><strong>2.7 硬盘分区</strong></p>
 <p>首先查看存储设备</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> fdisk -l</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># fdisk -l
+</code></pre>
 <p>输出像“Disk /dev/sda xx GiB …”这种的，xx也就是该存储设备的总容量，然后你判断哪个设备是有多余空间的。假如该设备是<code>/dev/sda</code>，这时候你还可以通过如下命令查看该存储设备下已有的分区情况：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> fdisk -l /dev/sda</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># fdisk -l /dev/sda
+</code></pre>
 <p>如果存在已有分区，将会看到包含<code>/dev/sda1</code>，<code>/dev/sda2</code>……等分区信息。这时候我们在该磁盘上的未分配空间上开始建立新分区，用来安装Arch Linux：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> fdisk /dev/sda</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># fdisk /dev/sda
+</code></pre>
 <p>进入了<code>fdisk</code>分区工具里边，可以使用如下功能：</p>
 <ul>
 <li>m: 查看帮助</li>
@@ -167,85 +176,118 @@
 <p><strong>2.8 格式化分区</strong></p>
 <p>Linux支持安装在ext4的文件系统上，如果是UEFI模式，那么引导分区的文件系统类型应该是Fat32。</p>
 <p><strong>如果是BIOS模式：</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> mkfs.ext4 /dev/sda5</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># mkfs.ext4 /dev/sda5
+</code></pre>
 <p><strong>如果是UEFI模式：</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> mkfs.fat -F32 /dev/sda5</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> mkfs.ext4 /dev/sda6</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># mkfs.fat -F32 /dev/sda5
+</code></pre>
+<pre><code class="shell"># mkfs.ext4 /dev/sda6
+</code></pre>
 <p><strong>2.9 挂载分区</strong></p>
 <p>挂载新分区到<code>/mnt</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> mount /dev/sda5  /mnt</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># mount /dev/sda5  /mnt
+</code></pre>
 <p><strong>如果是UEFI模式，还需要挂载引导引导分区（注意执行顺序）</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> mount /dev/sda6  /mnt</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> mkdir -p /mnt/boot/efi</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> mount /dev/sda5  /mnt/boot/efi</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># mount /dev/sda6  /mnt
+</code></pre>
+<pre><code class="shell"># mkdir -p /mnt/boot/efi
+</code></pre>
+<pre><code class="shell"># mount /dev/sda5  /mnt/boot/efi
+</code></pre>
 <p><strong>2.10 设置软件源</strong></p>
 <p>默认使用的是国外的软件源，下载的速度很慢，因此需要改为国内的源。通过<code>vim</code>命令编辑软件源配置文件。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># vim /etc/pacman.d/mirrorlist
+</code></pre>
 <p>按<code>i</code>切换到编辑模式，在该文件最前面加入如下的网易源：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server = https://mirrors.163.com/archlinux/repo/os/arch</span><br></pre></td></tr></table></figure>
-<p>按<code>esc</code>，然后再输入<code>:wq</code>按回车键保存并退出。接下来还有很多次涉及到使用vim编辑文件，用法跟这里一样。</p>
+<pre><code>Server = https://mirrors.163.com/archlinux/repo/os/arch
+</code></pre><p>按<code>esc</code>，然后再输入<code>:wq</code>按回车键保存并退出。接下来还有很多次涉及到使用vim编辑文件，用法跟这里一样。</p>
 <p><strong>2.11 安装基本的系统</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> pacstrap /mnt base base-devel</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># pacstrap /mnt base base-devel
+</code></pre>
 <p>这样，基本的系统就安装完成了。不过还需要配置系统，比如系统时区，主机名，主机语言，系统引导等这些项目。</p>
 <h2 id="3-配置新安装的Arch-Linux"><a href="#3-配置新安装的Arch-Linux" class="headerlink" title="3. 配置新安装的Arch Linux"></a>3. 配置新安装的Arch Linux</h2><p><strong>3.1 生成挂载信息文件</strong></p>
 <p>默认情况下，只要电脑重启后，并不会自动挂在磁盘分区，会造成系统无法正常使用。因此，通过配置<code>/etc/fstab</code>文件，系统开机会读取这个文件里面的挂在信息，然后挂在相应的磁盘分区。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+</code></pre>
 <p><strong>3.2 切换到新系统</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># arch-chroot /mnt
+</code></pre>
 <p>这时候我们就已经处于新安装的Arch Linux上了，接下来开始配置系统。</p>
 <p><strong>3.3 安装vim</strong></p>
 <p>在接下来的系统配置过程中，经常需要编辑某些配置文件。在命令行下，vim是一个很方便的编辑工具。通过如下命令安装vim：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> pacman -S vim</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># pacman -S vim
+</code></pre>
 <p><strong>3.4 设置时区</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> hwclock --systohc</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</code></pre>
+<pre><code class="shell"># hwclock --systohc
+</code></pre>
 <p>设置为亚洲地区的上海城市，也就是中国的标准时区。</p>
 <p><strong>3.5 设置本地化文本编码</strong></p>
 <p>用vim编辑<code>/etc/locale.gen</code>，加入如下内容：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zh_CN.UTF-8 UTF-8</span><br></pre></td></tr></table></figure>
+<pre><code class="shell">zh_CN.UTF-8 UTF-8
+</code></pre>
 <p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> locale-gen</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"> # locale-gen
+</code></pre>
 <p>用vim编辑<code>/etc/locale.conf</code>，加入如下内容：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=en_US.UTF-8</span><br></pre></td></tr></table></figure>
+<pre><code class="shell">LANG=en_US.UTF-8
+</code></pre>
 <p><strong>3.6 设置主机名</strong></p>
 <p>用vim编辑<code>/etc/hostname</code>，你的主机名，你则在该文件输入可爱的名字<code>hellokitty</code>，主机名怎么取看你个人喜欢，一般不要以数字开头。</p>
 <p><strong>3.7 配置hosts文件</strong></p>
 <p>用vim编辑<code>/etc/hosts</code>，加入如下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1	localhost</span><br><span class="line">::1	    	localhost</span><br><span class="line">127.0.1.1	hellokitty.localdomain	hellokitty</span><br></pre></td></tr></table></figure>
-<p>把<code>hellokitty</code>换成你的主机名就行了。</p>
+<pre><code>127.0.0.1    localhost
+::1            localhost
+127.0.1.1    hellokitty.localdomain    hellokitty
+</code></pre><p>把<code>hellokitty</code>换成你的主机名就行了。</p>
 <p><strong>3.8 用户账户配置</strong></p>
 <p>给管理员账号设置密码：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> passwd</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># passwd
+</code></pre>
 <p>然后输入密码按回车键，会让你再确认一次，再输入密码再回车。</p>
 <p>创建新普通用户，假如叫<code>tom</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> useradd -m tom</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># useradd -m tom
+</code></pre>
 <p>给<code>tom</code>设置密码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> passwd tom</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># passwd tom
+</code></pre>
 <p>然后输入密码按回车键，会让你再确认一次，再输入密码再回车。</p>
 <p><strong>3.9 安装grub设置引导</strong></p>
 <p>如果是Intel的CPU，安装<code>intel-ucode</code>：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> pacman -S intel-ucode</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># pacman -S intel-ucode
+</code></pre>
 <p>如果当前电脑存在其他系统，安装<code>os-prober</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> pacman -S os-prober</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># pacman -S os-prober 
+</code></pre>
 <p>安装grub:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> pacman -S grub</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># pacman -S grub
+</code></pre>
 <p>BIOS模式下部署grub：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> grub-install --target=i386-pc /dev/sda</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># grub-install --target=i386-pc /dev/sda
+</code></pre>
 <p>UEFI模式下，需要安装<code>efibootmgr</code>，然后部署grub：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> pacman -S efibootmgr</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ArchLinux</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># pacman -S efibootmgr
+</code></pre>
+<pre><code class="shell"># grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ArchLinux
+</code></pre>
 <p>生成grub配置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre>
 <p><strong>3.10 安装图形界面</strong></p>
 <p>命令行的系统显然不是我们想要的，谁喜欢黑底白字的界面呢？Gnome具有简洁的图形界面，接下来我们要安装Gnome已经一些基本的软件。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> pacman -S gnome gnome-extra</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># pacman -S gnome gnome-extra
+</code></pre>
 <p>这时候虽然安装了图形界面，但开机的时候默认还是进入命令行。所以，设置开机进入图形界面。GDM是一个图形界面管理器，让它开机启动即可。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> systemctl enable gdm</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># systemctl enable gdm
+</code></pre>
 <p><strong>3.11 配置完毕</strong></p>
 <p>现在基本的工作已经做完了，退出当前系统回到启动U盘。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> exit</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># exit
+</code></pre>
 <p>重启系统 </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> reboot</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"># reboot
+</code></pre>
 <p>尽情使用Arch Linux吧~</p>
 
 		</div>

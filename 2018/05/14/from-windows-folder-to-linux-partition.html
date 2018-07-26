@@ -9,6 +9,8 @@
 	<script src="/js/jquery-1.12.4.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<link rel="icon" href="/res/favicon.png" type="image/x-icon">
+	<link rel="stylesheet" href="/css/highlight.min.css">
+	<script src="/js/highlight.min.js"></script>
 </head>
 <body>
 <nav class="navbar-default navbar">
@@ -82,38 +84,68 @@
 <p>地址也相对来说的，相对于中国来说，我现在在中国重庆；相对于亚洲来说，我在亚洲中国重庆。对于计算机来说，如果我们想定位某个文件或者文件夹在哪里，就使用到路径。</p>
 <p>在Windows中，我们的路径相对于盘符来说的。</p>
 <p>假如我们的“C”盘下有“Program Files”、“Program Files(x86)”和“Windows”这几个文件夹和一个文件名是“myfile.txt”的文件，其中“Windows”文件夹下又有“Boot”、“Fonts”、“zh-CN”这几个文件夹，“Fonts”文件夹下有个文件叫做“simsun.ttc”。这时候，这些文件夹和文件的路径就是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:/Program Files</span><br><span class="line">C:/Program Files(x86)</span><br><span class="line">C:/Windows</span><br><span class="line">C:/myfile.txt</span><br><span class="line">C:/Windows/Boot</span><br><span class="line">C:/Windows/Fonts</span><br><span class="line">C:/Windows/Fonts/simsun.ttc</span><br><span class="line">C:/Windows/zh-CN</span><br></pre></td></tr></table></figure>
-<p>当然也可以用“\”替换为“/”来表示，如“C:\Windows\Boot”。</p>
+<pre><code>C:/Program Files
+C:/Program Files(x86)
+C:/Windows
+C:/myfile.txt
+C:/Windows/Boot
+C:/Windows/Fonts
+C:/Windows/Fonts/simsun.ttc
+C:/Windows/zh-CN
+</code></pre><p>当然也可以用“\”替换为“/”来表示，如“C:\Windows\Boot”。</p>
 <p><strong>2.3 文件夹就是装文件的一个文件袋。</strong></p>
 <p>之前没有介绍就直接使用这个概念了，主要它就如它的名字那样形象。比如我将这几个文件名叫做“aa”，“bb.txt”，“are-you-ok.mp3”的文件存一起存放在一个名字叫做“myfolder”的文件夹下。</p>
 <p>文件夹里面可以是文件，也可以是文件夹。所以，你可以认为，“C”盘就是一个很大的文件夹，存放了Windows的各种文件和文件夹。</p>
 <p><strong>2.4 目录又是什么东西？</strong></p>
 <p>每本书前面都有目录，目录上写着哪些章节在哪个页数上。这样，我们就很快翻到我们想要的章节的页面上。计算机文件目录也类似。</p>
 <p>还是假如我们的“C”盘下有“Program Files”、“Program Files(x86)”和“Windows”这几个文件夹和一个文件名是“myfile.txt”的文件。所以现在“C”盘的目录是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Program Files</span><br><span class="line">Program Files(x86)</span><br><span class="line">Windows</span><br><span class="line">myfile.txt</span><br></pre></td></tr></table></figure>
-<p>你可以想象成，这些文件夹或者文件的名字就如同书籍里的“章节”的名字一样。书籍的目录在于快速翻到某一章节对应的页面，计算机文件目录则是快速访问到某一个文件或文件夹。这里就不需要页码了，因为点点鼠标就可以访问它们。</p>
+<pre><code>Program Files
+Program Files(x86)
+Windows
+myfile.txt
+</code></pre><p>你可以想象成，这些文件夹或者文件的名字就如同书籍里的“章节”的名字一样。书籍的目录在于快速翻到某一章节对应的页面，计算机文件目录则是快速访问到某一个文件或文件夹。这里就不需要页码了，因为点点鼠标就可以访问它们。</p>
 <p>我们还常常遇到“根目录”这种说法，根目录就是相对于某个文件夹来说，最表层的目录。“C”盘根目录就是打开“C”盘时，我们首先看到的那些文件或文件夹目录，它的对应的路径是“C:\”。</p>
 <h2 id="3-Linux下的文件与文件夹"><a href="#3-Linux下的文件与文件夹" class="headerlink" title="3. Linux下的文件与文件夹"></a>3. Linux下的文件与文件夹</h2><p><strong>3.1 Linux系统是什么？</strong></p>
 <p>Linux是一个内核。什么是内核？它就是操作系统的最基本的实现部分，Windows内核和Linux是两种不同的实现方式。在内核的基础上，新增一些软件就成了计算机系统。所以，基于Linux内核实现出来的各种各样的系统称为Linux发行版，也就是我们常说的Linux系统（这是一种错误的叫法）。每个发行版也会取一个名字，比如“Ubuntu”，“CentOS”，“Arch”，“Gentoo”。</p>
 <p><strong>3.2 Linux下的文件夹和路径</strong></p>
 <p>在Windows系统所在的盘的根目录，会有“Program Files”、“Program Files(x86)”和“Windows”……这些文件夹。而在Linux中系统根目录的文件夹是“boot”，“etc”，“home”……</p>
 <p>Windows中“C”盘根目录以及文件夹的路径这样表示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\</span><br><span class="line">C:\Program Files</span><br><span class="line">C:\Program Files(x86)</span><br><span class="line">C:\Windows</span><br></pre></td></tr></table></figure>
-<p>在Linux中则是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">/boot</span><br><span class="line">/etc</span><br><span class="line">/home</span><br></pre></td></tr></table></figure>
-<p>再往里层呢？比如“home”文件夹下边有个文件“ebook.txt”，则表示为<code>/home/ebook.txt</code>。</p>
+<pre><code>C:\
+C:\Program Files
+C:\Program Files(x86)
+C:\Windows
+</code></pre><p>在Linux中则是：</p>
+<pre><code>/
+/boot
+/etc
+/home
+</code></pre><p>再往里层呢？比如“home”文件夹下边有个文件“ebook.txt”，则表示为<code>/home/ebook.txt</code>。</p>
 <h2 id="4-Linux下的分区"><a href="#4-Linux下的分区" class="headerlink" title="4. Linux下的分区"></a>4. Linux下的分区</h2><p>在Linux下，一个存储设备用形如“/sdX”的文件名来表示。比如我电脑上有一块硬盘，然后我再插了一个U盘。此时，我的硬盘表示为<code>/dev/sda</code>，U盘表示为<code>/dev/sdb</code>。</p>
 <p>如果存储设备已经存在一些分区，那么这些分区用形如“/dev/sdX1”，“/dev/sdX2”，“/dev/sdX3”来表示。比如我的硬盘上有三个分区，那么它们被分别表示为“/dev/sda1”，“/dev/sda2”，“/dev/sda3”；U盘默认只有一个分区，则是“/dev/sdb1”。</p>
 <p>前面我们了解到，在Windows中，我们可以用“A”，“B”，“C”等盘符来表示某个分区。它们与硬盘分区的对应关系如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C - 硬盘第一个分区</span><br><span class="line">D - 硬盘第二个分区</span><br><span class="line">E - 硬盘第三个分区</span><br></pre></td></tr></table></figure>
-<p>等同于：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:/ - 硬盘第一个分区</span><br><span class="line">D:/ - 硬盘第二个分区</span><br><span class="line">E:/ - 硬盘第三个分区</span><br></pre></td></tr></table></figure>
-<p>之前我说过，你可以认为，“C”盘就是一个很大的文件夹，存放了Windows的各种文件和文件夹。</p>
+<pre><code>C - 硬盘第一个分区
+D - 硬盘第二个分区
+E - 硬盘第三个分区
+</code></pre><p>等同于：</p>
+<pre><code>C:/ - 硬盘第一个分区
+D:/ - 硬盘第二个分区
+E:/ - 硬盘第三个分区
+</code></pre><p>之前我说过，你可以认为，“C”盘就是一个很大的文件夹，存放了Windows的各种文件和文件夹。</p>
 <p>看到了吗？其实就是盘符根这个特殊的文件夹与硬盘的对应关系，Linux中就是这么干的！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/ -		硬盘第一个分区</span><br><span class="line">/boot -		硬盘第二个分区</span><br><span class="line">/boot/efi -	硬盘第三个分区</span><br><span class="line">/etc -		硬盘第四个分区</span><br><span class="line">/home -		硬盘第五个分区</span><br></pre></td></tr></table></figure>
-<p>建立这种对应关系在Windows中叫做“分配盘符”，在Linux中叫做“挂载”。一般情况下我们安装Linux时，需要把如下这些文件夹挂载到对应的分区上：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">/boot/efi</span><br><span class="line">/home</span><br><span class="line">/usr</span><br><span class="line">/opt</span><br><span class="line">/var</span><br></pre></td></tr></table></figure>
-<p>你可能会说，安装个系统搞这么多分区好复杂啊！因为Linux主要是服务器用途，合理地给每个文件夹对应的分区选择合适的容量大小是很有必要的。当然，作为个人用户，你倔强地说，“我就没有这种习惯！”那么，你可以只给<code>/</code>挂载到硬盘就行了。</p>
+<pre><code>/ -        硬盘第一个分区
+/boot -        硬盘第二个分区
+/boot/efi -    硬盘第三个分区
+/etc -        硬盘第四个分区
+/home -        硬盘第五个分区
+
+</code></pre><p>建立这种对应关系在Windows中叫做“分配盘符”，在Linux中叫做“挂载”。一般情况下我们安装Linux时，需要把如下这些文件夹挂载到对应的分区上：</p>
+<pre><code>/
+/boot/efi
+/home
+/usr
+/opt
+/var
+</code></pre><p>你可能会说，安装个系统搞这么多分区好复杂啊！因为Linux主要是服务器用途，合理地给每个文件夹对应的分区选择合适的容量大小是很有必要的。当然，作为个人用户，你倔强地说，“我就没有这种习惯！”那么，你可以只给<code>/</code>挂载到硬盘就行了。</p>
 <p>接下来，你就可以去安装你的Linux发行版了。对于初学者，我推荐的Linux发行版是Arch Linux。它的安装并不难，只是步骤比较繁琐，你需要有耐心。稍后我将献上<a href="https://www.jianshu.com/p/7c78dc4c53e5" target="_blank" rel="noopener">Arch Linux 安装指南</a>。</p>
 
 		</div>
