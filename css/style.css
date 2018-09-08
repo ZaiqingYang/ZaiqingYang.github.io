@@ -21,8 +21,8 @@ a:hover{
     margin-bottom: 16px;
 }
 h1,h2,h3{
-    font-family: ;
     font-weight: bold;
+	margin: 0.8em 0em;
 }
 .col-md-4, .col-md-8{
     padding-left:8px;
@@ -36,10 +36,6 @@ h1,h2,h3{
 @media (min-width: 992px){
     .container-fluid {
         width: 970px;
-    }
-    .post{
-        max-width: 800px;
-        margin: 0 auto;
     }
 }
 
@@ -62,8 +58,9 @@ h1,h2,h3{
     font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
 }
 .module_content{
+	font-size: 18px;
     padding: 16px 0px;
-    font-family: Georgia, serif;
+    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
 .desc{
     padding-left: 16px;
@@ -83,7 +80,7 @@ h1,h2,h3{
 }
 .post .module_content{
     color: #000;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 180%;
 }
 .post .module_content img{
