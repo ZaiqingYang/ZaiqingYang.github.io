@@ -64,8 +64,12 @@
 	</div>
 </div>
   <div id="footer">
-	Copyright 2019 清无色
+	COPYRIGHT <span id="time">2018</span> 清无色
 </div>
+<script>
+	var nowYear = new Date().getFullYear();
+	$("#time").append(" - "+nowYear);
+</script>
 </div>
 </body>
 </html>

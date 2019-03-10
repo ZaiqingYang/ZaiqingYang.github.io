@@ -9,8 +9,15 @@ a{
 a:hover{
     color: #000;
     text-decoration: none;
-    background: #e7e7e7;
+    color: orange;
+	transition:color .5s;
 }
+.category-list-count,.geo_font{
+	font-family: Georgia, serif;
+}
+.category-list-count:before{content:"（"}
+.category-list-count:after{content:"）"}
+
 .navbar-default{
     background-color: white;
     font-weight: bold;
@@ -44,7 +51,6 @@ h1,h2,h3{
 
 /*custom style*/
 .module{
-    border: 1px solid #e7e7e7;
     margin-bottom: 16px;
     
 }
@@ -53,9 +59,10 @@ h1,h2,h3{
     font-size: 18px;
     font-weight: bold;
     color: gray;
-    background-color: #f8f8f8;
     border-bottom: 1px solid #e7e7e7;
     font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+	display:inline-block;
+	padding-left: 0px;
 }
 .module_content{
 	font-size: 18px;
@@ -63,14 +70,18 @@ h1,h2,h3{
     font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
 .module_content>ul>li{
-	list-style: none;
+	list-style: square;
+}
+#first_post_title{
+	color: gray;
+	font-size: 1.5em;
 }
 .desc{
     padding-left: 16px;
     padding-right: 16px;
 }
 .desc_title{
-    text-align: right;
+    text-align: left;
 }
 .post{
     padding: 16px;
