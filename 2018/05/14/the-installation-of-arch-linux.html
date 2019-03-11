@@ -57,7 +57,7 @@
 			<div>日期：2018/05/14 20:06</div>
 		</div>
 		<div class="module_content desc">
-				<h2 id="1-前提"><a href="#1-前提" class="headerlink" title="1. 前提"></a>1. 前提</h2><p><strong>为什么推荐Arch Linux？因为它好用呗！</strong></p>
+				<h2 id="1-前提"><a href="#1-前提" class="headerlink" title="1.前提"></a>1.前提</h2><p><strong>为什么推荐Arch Linux？因为它好用呗！</strong></p>
 <p>如果想要学习Linux，Arch Linux是个很好的选择。Arch Linux提供了非常详细并且更新及时的Wiki（帮助文档），使用系统的过程中遇到的问题基本上都空余从上面找到。</p>
 <p>Arch Linux采取滚动更新的方式，一旦系统或者软件有新版本发布，你就可以升级它们。你的系统以及软件始终处在最新的状态，因此系统不存在发布新系统而要重装的问题。</p>
 <p>但Arch Linux安装比较繁琐，整个安装过程都在命令行下执行，这也是很多人觉得它很难安装的原因。其实安装并不难，步骤繁琐是真的，只要你有耐心，这都没问题。一旦你从头到尾安装完毕，你就掌握了许多基本的知识，比如分区的创建与挂载、系统引导安装、配置软件源等，这些对于学习Linux来说是好事。</p>
@@ -93,7 +93,7 @@
 <p><a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="noopener">Installation guide (English Version)</a></p>
 <p><a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">Installation guide (简体中文)</a>)</p>
 <p><strong>因为安装Arch Linux非常简单，所以全程没有配图。</strong></p>
-<h2 id="2-系统的基本安装"><a href="#2-系统的基本安装" class="headerlink" title="2. 系统的基本安装"></a>2. 系统的基本安装</h2><p>本章节完成最基本的系统安装，只有命令行界面的Arch Linux系统。</p>
+<h2 id="2-系统的基本安装"><a href="#2-系统的基本安装" class="headerlink" title="2.系统的基本安装"></a>2.系统的基本安装</h2><p>本章节完成最基本的系统安装，只有命令行界面的Arch Linux系统。</p>
 <p><strong>2.1 通过BIOS设置U盘为最先启动项</strong></p>
 <p><strong>2.2 进入安装盘系统选择第一项</strong></p>
 <p>UEFI模式第一项是“Arch Linux archiso x86_64 UEFI USB”</p>
@@ -206,7 +206,7 @@
 <pre><code class="shell"># pacstrap /mnt base base-devel
 </code></pre>
 <p>这样，基本的系统就安装完成了。不过还需要配置系统，比如系统时区，主机名，主机语言，系统引导等这些项目。</p>
-<h2 id="3-配置新安装的Arch-Linux"><a href="#3-配置新安装的Arch-Linux" class="headerlink" title="3. 配置新安装的Arch Linux"></a>3. 配置新安装的Arch Linux</h2><p><strong>3.1 生成挂载信息文件</strong></p>
+<h2 id="3-配置新安装的Arch-Linux"><a href="#3-配置新安装的Arch-Linux" class="headerlink" title="3.配置新安装的Arch Linux"></a>3.配置新安装的Arch Linux</h2><p><strong>3.1 生成挂载信息文件</strong></p>
 <p>默认情况下，只要电脑重启后，并不会自动挂在磁盘分区，会造成系统无法正常使用。因此，通过配置<code>/etc/fstab</code>文件，系统开机会读取这个文件里面的挂在信息，然后挂在相应的磁盘分区。</p>
 <pre><code class="shell"># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
 </code></pre>
