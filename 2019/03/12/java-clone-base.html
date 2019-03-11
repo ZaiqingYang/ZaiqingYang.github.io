@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>清无色的博客站</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<script src="/js/jquery-1.12.4.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<link rel="icon" href="/res/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="/css/highlight.min.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<script src="/js/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<nav class="navbar-default navbar">
+	<div class="container-fluid">
+	  <div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		  <span class="sr-only"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="/">清无色的博客站</a>
+	  </div>
+	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		
+		<ul class="nav navbar-nav navbar-right">
+		
+			<li>
+			  <a href="/" class="menu-item-link">主页</a>
+			</li>
+			
+			<li>
+			  <a href="/archives" class="menu-item-link">归档</a>
+			</li>
+			
+			<li>
+			  <a href="/about" class="menu-item-link">关于</a>
+			</li>
+			
+		</ul>
+	  </div>
+	</div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+	<div class="module post">
+		<div class="module_title">
+			<h1>浅谈Java克隆</h1>
+		</div>
+		<div id="post_meta">
+			<div>作者：清无色</div>
+			<div>归类：<a class="category-link" href="/categories/Java语言/">Java语言</a></div>
+			<div>日期：2019/03/12 01:03</div>
+		</div>
+		<div class="module_content desc">
+				<p>何谓深浅？程度而已。</p>
+<a id="more"></a>
+<p><strong>克隆：复制一份</strong></p>
+<p>被克隆的类实现Cloneable接口，覆盖clone()方法，返回调用父类的clone()即可。</p>
+<pre><code class="java">public class Person implements Cloneable{
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+    //...省略其余代码
+}
+</code></pre>
+<p>然后，克隆时只须调用我们刚刚覆盖的<code>clone()</code>。</p>
+<h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><p>现在有<code>Child</code>类：</p>
+<pre><code class="java">public class Child{
+    //...省略其余代码
+}
+</code></pre>
+<p>还有<code>Person</code>类：</p>
+<pre><code class="java">public class Person implements Cloneable{
+
+    private int age;
+    private String name;
+    private Child child;
+    //...省略其余代码
+}
+</code></pre>
+<p>克隆Person对象p1赋给p2，然后我们看看他们的<code>toString()</code>和<code>hashCode()</code>结果：</p>
+<pre><code class="java">public class Main {
+
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Person p1 = new Person(&quot;zhangsan&quot;,23);
+        p1.setChild(new Child(&quot;xiaoming&quot;, 1););
+        //克隆操作
+        Person p2 = p1.clone();
+        //打印看看
+        System.out.println(p1+&quot;, &quot;+p1.hashCode()+&quot;, &quot;+p1.getChild().hashCode());
+        System.out.println(p2+&quot;, &quot;+p2.hashCode()+&quot;, &quot;+p2.getChild().hashCode());
+    }
+}
+
+</code></pre>
+<p>输出：</p>
+<pre><code>Person [age=23, name=zhangsan, value=666, child=Child [name=xiaoming, age=1]], 118352462, 1550089733
+Person [age=23, name=zhangsan, value=666, child=Child [name=xiaoming, age=2]], 865113938, 1550089733
+</code></pre><p>结论：p1，p2成员的值相等，但它们是两个不同的对象，他们的Child成员是同一个对象。</p>
+<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p>给<code>Child</code>也实现<code>Cloneable</code>接口并覆盖<code>clone()</code>：</p>
+<pre><code class="java">public class Child implements Cloneable{
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();;
+    }
+    //...省略其余代码
+}
+</code></pre>
+<p>然后，改变<code>Person</code>类的<code>clone()</code>的实现：</p>
+<pre><code class="java">public class Person implements Cloneable{
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Person p = (Person)super.clone();
+        p.setChild((Child)child.clone());
+        return p;
+    }
+     //...省略其余代码
+}
+</code></pre>
+<p>然后再调用上面的<code>main(String [] args)</code>，结果是：</p>
+<pre><code>Person [age=23, name=zhangsan, value=666, child=Child [name=xiaoming, age=1]], 118352462, 1550089733
+Person [age=23, name=zhangsan, value=666, child=Child [name=xiaoming, age=2]], 865113938, 1442407170
+</code></pre><p>结论：p1，p2是两个不同的对象，他们的Child成员也是两个不同的对象。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>克隆就是复制一份。</p>
+<p>浅拷贝就是简单复制值，如果有引用成员，他们的引用成员将是同一个对象，深拷贝则不为然。</p>
+<p><strong>为什么呢</strong></p>
+<p>可以这样认为，调用谁的<code>clone()</code>就是就是对谁深拷贝。</p>
+<p>在上面浅拷贝的例子中，因为调用了<code>p1</code>对象的<code>clone()</code>，所以<code>p1</code>和<code>p2</code>是两个不同的对象（对p1，p2本身深拷贝）；在深拷贝的例子中，不但调用了<code>p1</code>的<code>clone()</code>，也调用<code>Child</code>类型对象的<code>clone()</code>，所以两个<code>Child</code>类型对象不同（对所有对象深拷贝）。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>基于上述例子，如何实现<code>Person</code>类的<code>clone()</code>，使得只对<code>Child</code>成员进行深拷贝，而不对<code>Person</code>本身深拷贝？</p>
+
+		</div>
+	</div>
+</div>
+  <div id="footer">
+	© <span id="time">2018</span> 清无色
+</div>
+<script>
+	var nowYear = new Date().getFullYear();
+	$("#time").append(" - "+nowYear);
+</script>
+</div>
+</body>
+</html>
