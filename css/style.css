@@ -32,9 +32,8 @@ h1,h2,h3{
 	margin: 0.8em 0em;
 }
 .module_content h2{
-	background: orange;
-	display: inline-block;
-	padding: 5px;
+	border-left: 22px solid orange;
+	padding-left: 15px;
 	font-family:"Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
 }
 .col-md-4, .col-md-8{
