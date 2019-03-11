@@ -59,13 +59,13 @@
 <p>被克隆的类实现<code>Cloneable</code>接口，覆盖<code>clone()</code>方法，返回调用父类的<code>clone()</code>即可。</p>
 <pre><code class="java">public class Person implements Cloneable{
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    protected Object clone() throws CloneNotSupportedException { 
         return super.clone();
     }
     //...省略其余代码
 }
 </code></pre>
-<p>然...</div>
+<p>...</div>
 			</div>
 		</div>
 		<div class="module">
