@@ -57,9 +57,9 @@
 			<div>日期：2019/03/12 01:03</div>
 		</div>
 		<div class="module_content desc">
-				<p>何谓深浅？程度而已。</p>
-<p><strong>克隆：复制一份</strong></p>
-<p>被克隆的类实现<code>Cloneable</code>接口，覆盖<code>clone()</code>方法，返回调用父类的<code>clone()</code>即可。</p>
+				<p>何谓克隆？拷贝（复制）的意思。何谓深浅拷贝？程度而已。</p>
+<a id="more"></a>
+<p>被克隆的类实现<code>Cloneable</code>接口，覆盖<code>clone()</code>方法，调用父类的<code>clone()</code>作为返回结果即可，如：</p>
 <pre><code class="java">public class Person implements Cloneable{
     @Override
     protected Object clone() throws CloneNotSupportedException { 
