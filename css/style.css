@@ -10,7 +10,7 @@ a{
 a:hover, #post_meta a:hover{
     color: #000;
     text-decoration: none;
-    color: orange;
+    color: #007fff;
 	transition:color .5s;
 }
 .category-list-count,.geo_font{
