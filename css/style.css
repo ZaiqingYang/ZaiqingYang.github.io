@@ -56,6 +56,11 @@ h1,h2,h3{
 
 
 /*custom style*/
+pre{ 
+	min-width:768px; 
+	overflow: auto; 
+	overflow-y:hidden;
+	}
 .module{
     margin-bottom: 16px;
     
