@@ -49,15 +49,47 @@
   <div class="row">
 	<div class="module post">
 		<div class="module_title">
-			<h1></h1>
+			<h1>小米OJ第5题：找出旋转有序数列的中间值</h1>
 		</div>
 		<div id="post_meta">
 			<div>作者：清无色</div>
-			<div>归类：页面</div>
+			<div>归类：<a class="category-link" href="/categories/低水平OJ入门/">低水平OJ入门</a></div>
 			<div>日期：2019/04/13 20:00</div>
 		</div>
 		<div class="module_content desc">
-				
+				<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><strong>描述</strong><br>给出一个有序数列随机旋转之后的数列，如原有序数列为：[0,1,2,4,5,6,7] ，旋转之后为[4,5,6,7,0,1,2]。 假定数列中无重复元素，且数列长度为奇数。 求出旋转数列的中间值。如数列[4,5,6,7,0,1,2]的中间值为4。</p>
+<p><strong>输入</strong><br>4,5,6,7,0,1,2</p>
+<a id="more"></a> 
+<p><strong>输出</strong><br>4</p>
+<p><strong>输入样例</strong></p>
+<p>1<br>1,2,3<br>4,5,6,7,0,1,2<br>12,13,14,5,6,7,8,9,10</p>
+<p><strong>输出样例</strong></p>
+<p>1<br>2<br>4<br>9</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>先排序，再取中间值。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><pre><code class="java">import java.util.*;
+
+public class Main {
+    public static void main(String args[]) {
+        Scanner scan = new Scanner(System.in);
+        String line;
+        while (scan.hasNextLine()) {
+            line = scan.nextLine().trim();
+            String strArr[] = line.split(&quot;,&quot;);
+            if(strArr.length == 1) {
+                System.out.println(strArr[0]);
+            }else {
+                int arr[] = new int[strArr.length];
+                for (int i = 0; i &lt; strArr.length; i++) {
+                    arr[i] = Integer.parseInt(strArr[i]);
+                }
+                Arrays.sort(arr);
+                System.out.println(arr[(arr.length - 1)/2]);
+            }
+        }
+    }
+}
+</code></pre>
+
 		</div>
 	</div>
 </div>
